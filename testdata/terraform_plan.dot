@@ -1,0 +1,18 @@
+digraph {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  subgraph "root" {
+    "[root] local_file.kube_config (expand)" [label = "local_file.kube_config", shape = "box"]
+    "[root] module.cluster.kubernetes_namespace.apps (expand)" [label = "module.cluster.kubernetes_namespace.apps", shape = "box"]
+    "[root] module.cluster.kubernetes_secret.registry (expand)" [label = "module.cluster.kubernetes_secret.registry", shape = "box"]
+    "[root] module.storage.module.volume.cloud_volume.data (expand)" [label = "module.storage.module.volume.cloud_volume.data", shape = "box"]
+    "[root] provider[\"registry.terraform.io/example/cloud\"]" [label = "provider[\"registry.terraform.io/example/cloud\"]", shape = "diamond"]
+    "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]" [label = "provider[\"registry.terraform.io/hashicorp/kubernetes\"]", shape = "diamond"]
+    "[root] var.cloud_token" [label = "var.cloud_token", shape = "note"]
+    "[root] local_file.kube_config (expand)" -> "[root] module.cluster.kubernetes_namespace.apps (expand)"
+    "[root] module.cluster.kubernetes_namespace.apps (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+    "[root] module.cluster.kubernetes_secret.registry (expand)" -> "[root] module.cluster.kubernetes_namespace.apps (expand)"
+    "[root] module.storage.module.volume.cloud_volume.data (expand)" -> "[root] provider[\"registry.terraform.io/example/cloud\"]"
+    "[root] module.storage.module.volume.cloud_volume.data (expand)" -> "[root] var.cloud_token"
+  }
+}

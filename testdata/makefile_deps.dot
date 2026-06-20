@@ -1,0 +1,12 @@
+// Representative of what make2graph / remake -x emit for a Makefile's
+// target dependency graph.
+digraph G {
+  rankdir="LR";
+  node [shape=box];
+  "all" -> "build";
+  "all" -> "test";
+  "build" -> "vendor";
+  "test" -> "build";
+  "vendor" [shape=ellipse, color=blue];
+  "clean" [shape=diamond];
+}
